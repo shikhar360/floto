@@ -11,11 +11,12 @@ import {
   trustWallet,
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { configureChains, createConfig, useNetwork, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, goerli , polygonMumbai} from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 
 import "./globals.css";
+import { createPublicClient, createWalletClient, http } from 'viem';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
@@ -29,6 +30,21 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [publicProvider()]
 );
 
+
+
+
+
+export const walletclient = createWalletClient({
+  chain:  polygonMumbai,
+  transport: http()
+})
+
+
+
+export const publicclient = createPublicClient({ 
+  chain: polygonMumbai,
+  transport: http()
+})
 
 
 const projectId = 'YOUR_PROJECT_ID';
